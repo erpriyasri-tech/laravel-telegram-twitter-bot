@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('rewritten_text')->nullable();
             $table->boolean('posted_to_x')->default(false);
             $table->timestamp('posted_at')->nullable();
+            $table->string('tweet_id')->nullable();
             $table->timestamp('message_date')->nullable();
             $table->timestamps();
         });

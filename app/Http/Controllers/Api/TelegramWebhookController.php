@@ -32,7 +32,7 @@ class TelegramWebhookController extends Controller
                 ]
             );
 
-            // Only process if from your channel (optional guard)
+            
             if ((int)$entity->chat_id === (int)env('TELEGRAM_CHANNEL_ID')) {
                 \Log::info('Dispatching job for TelegramMessage ID: ' . $entity->id);
                 ProcessTelegramMessageJob::dispatch($entity);

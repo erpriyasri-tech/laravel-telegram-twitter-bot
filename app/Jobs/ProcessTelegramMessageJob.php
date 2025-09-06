@@ -32,13 +32,20 @@ class ProcessTelegramMessageJob implements ShouldQueue {
 
         $resp = $x->post( $rewritten );
 
-        if ( isset( $resp[ 'id_str' ] ) || isset( $resp[ 'id' ] ) || isset( $resp[ 'data' ][ 'id' ] ) ) {
+        $tweetId = $resp['id_str'] ?? $resp['id'] ?? $resp['data']['id'] ?? null;
+        // echo $tweetId; exit;
+
+        if ($tweetId) {
             $message->update( [
                 'posted_to_x' => true,
                 'posted_at'   => now(),
+                'tweet_id' => $tweetId,
             ] );
         } else {
-            \Log::warning( 'Tweet not confirmed', [ 'resp' => $resp, 'msg' => $message->id ] );
+            Log::warning('Tweet not confirmed', [ 
+            'resp' => $resp, 
+            'msg' => $message->id 
+            ] );
         }
 
     }

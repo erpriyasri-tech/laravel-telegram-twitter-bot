@@ -11,7 +11,7 @@ class TelegramMessage extends Model
 
     protected $fillable = [
         'update_id','message_id','chat_id','chat_title','message_text',
-        'raw_update','rewritten_text','posted_to_x','posted_at','message_date'
+        'raw_update','rewritten_text','posted_to_x','posted_at','tweet_id','message_date'
     ];
 
     protected $casts = [

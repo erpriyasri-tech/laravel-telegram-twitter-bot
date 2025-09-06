@@ -24,7 +24,7 @@ class OpenAIService
             return $this->fallbackRewrite($text);
         }
 
-        $system = "You are a helpful assistant that rewrites Telegram channel posts into concise, engaging tweets (X). Keep within 280 characters where possible and preserve meaning.";
+        $system = "Rewrites Telegram channel posts into concise, engaging tweets (X).";
 
         $response = Http::withToken($this->apiKey)
             ->timeout(30)
@@ -40,7 +40,10 @@ class OpenAIService
 
         if ($response->failed()) {
           
-            \Log::error('OpenAI failed', ['status' => $response->status(), 'body' => $response->body()]);
+            Log::error('OpenAI failed', [
+                'status' => $response->status(), 
+                'body' => $response->body()
+            ]);
             return $this->fallbackRewrite($text);
         }
 
