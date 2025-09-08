@@ -9,13 +9,15 @@
 
 ## Setup
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/telegram-to-twitter.git
+   git clone https://github.com/erpriyasri-tech/laravel-telegram-twitter-bot.git
    cd telegram-to-twitter
    
 2. Install dependencies
    composer install
    npm install && npm run build
+   composer require guzzlehttp/guzzle
+   composer require revolution/laravel-socialite-twitter-oauth2   for Twitter v2
+
    
 3. Copy .env file and configure your environment
    cp .env.example .env
@@ -49,7 +51,37 @@
 
 API Endpoint
 Webhook URL (Telegram → Laravel):
-POST http://127.0.0.1:8000/api/telegram/webhook
+If you don’t have a domain name yet, you can still test the API locally using Postman.
+Send a POST request to:-
+http://127.0.0.1:8000/api/telegram/webhook
+
+JSON Body Sample
+{
+  "ok": true,
+  "result": [
+    {
+      "update_id": 89876505387,
+      "channel_post": {
+        "message_id": 3,
+        "sender_chat": { 
+          "id": -100123456890, 
+          "title": "Cloudmail-AI", 
+          "type": "channel" 
+        },
+        "chat": { 
+          "id": -10012345690, 
+          "title": "Cloudmail-AI", 
+          "type": "channel" 
+        },
+        "date": 1756728646,
+        "text": "Hi, This is my Node Js Project"
+      }
+    }
+  ]
+}
+
+Click On Send Button 
+
 
 Tech Stack
 Laravel 10
